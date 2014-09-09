@@ -18,11 +18,14 @@ public class GraphTest{
 	public void setUp() throws Exception {
 		root = new Node("One");
 		Node twoNode = new Node("two");
-		twoNode.addNeighbor(new Node("fifteen"));
+		Node fifteenNode = new Node("fifteen");
+		twoNode.addNeighbor(fifteenNode);
 		twoNode.addNeighbor(new Node("seventeen"));
 		twoNode.addNeighbor(new Node("twenty"));
 		root.addNeighbor(twoNode);
-		root.addNeighbor(new Node("three"));
+		Node threeNode = new Node("three");
+		threeNode.addNeighbor(fifteenNode);
+		root.addNeighbor(threeNode);
 		graph = new Graph(root);
 		numberOfElements = graph.getRoot().getNeighborsCount();
 	}
@@ -43,17 +46,17 @@ public class GraphTest{
 	@Test
 	public void bfsTestPositive() {
 		System.out.println("True when the term searched does exist");
-		assertTrue(graph.bfs("seventeen"));
+		assertTrue(graph.bfs("fifteen"));
 	}
 	
 	@Test
 	public void dfsTestNegative() {
 		System.out.println("False when the term searched doesn't exist");
-		assertFalse(graph.dfs("fourteen", graph.getRoot()));
+		assertFalse(graph.dfs("fourteen"));
 	}
 	@Test
 	public void dfsTestPositive() {
 		System.out.println("True when the term searched does exist");
-		assertTrue(graph.dfs("seventeen", graph.getRoot()));
+		assertTrue(graph.dfs("fifteen"));
 	}
 }

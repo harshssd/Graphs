@@ -6,7 +6,6 @@ import java.util.LinkedList;
 public class Graph {
 
 	private Node root;
-	HashSet<Node> visitedNodes = new HashSet<Node>();
 	
 	public Graph(String data) {
 		root = new Node(data);
@@ -53,7 +52,12 @@ public class Graph {
 		}		
 	}
 	
-	public boolean dfs(String searchKey, Node node) {
+	public boolean dfs(String searchKey) {
+		HashSet<Node> visitedNodes = new HashSet<Node>();
+		return dfsRecursive(searchKey, getRoot(), visitedNodes);
+	}
+	
+	public boolean dfsRecursive(String searchKey, Node node, HashSet<Node> visitedNodes) {
 		visitedNodes.add(node);
 		if(node == null) {
 			return false;
@@ -63,7 +67,7 @@ public class Graph {
 			}
 			for(Node neighbor: node.getNeighbors()){
 				if(visitedNodes.contains(neighbor) == false)
-					if(dfs(searchKey, neighbor)==true)
+					if(dfsRecursive(searchKey, neighbor, visitedNodes)==true)
 						return true;
 			}
 		}
