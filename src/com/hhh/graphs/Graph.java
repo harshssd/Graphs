@@ -1,5 +1,6 @@
 package com.hhh.graphs;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 
@@ -29,8 +30,8 @@ public class Graph {
 			return false;
 		} else {
 //			2. Else traverse and check each neighbor nodes for equality
-//			Add each node to the set of visited nodes
-//			Add each node to the queue of neighbor nodes
+//			Add each node checked to the set of visited nodes
+//			Add each neighbor node to the to be visited queue
 			LinkedList<Node> toBeVisitedQueue = new LinkedList<Node>();
 			HashSet<Node> visitedNodes = new HashSet<Node>();
 			toBeVisitedQueue.add(this.getRoot());
@@ -72,6 +73,24 @@ public class Graph {
 			}
 		}
 		return false;
+	}
+	
+	public HashMap<Node, Integer> dijkstra(){
+		HashMap<Node, Integer> distanceMap = new HashMap<Node, Integer>();
+		LinkedList<Node> toBeVisitedQueue = new LinkedList<Node>();
+		toBeVisitedQueue.add(getRoot());
+		distanceMap.put(getRoot(), 0);
+		while(!toBeVisitedQueue.isEmpty()) {
+			Node currentNode = toBeVisitedQueue.poll();
+			int currentDistance = distanceMap.get(currentNode);
+			for(Node neighbor: currentNode.getNeighbors()){
+				if(distanceMap.get(neighbor)==null || distanceMap.get(neighbor)>currentDistance+1){
+					toBeVisitedQueue.add(neighbor);
+					distanceMap.put(neighbor, currentDistance+1);
+				}				
+			}
+		}
+		return distanceMap;
 	}
 	
 }
