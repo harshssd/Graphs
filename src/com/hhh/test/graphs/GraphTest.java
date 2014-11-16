@@ -2,8 +2,6 @@ package com.hhh.test.graphs;
 
 import static org.junit.Assert.*;
 
-import java.util.HashMap;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -66,22 +64,4 @@ public class GraphTest{
 		assertTrue(graph.dfs("seventeen"));
 	}
 	
-	@Test
-	public void dijkstrasTestPositive() {
-		Node oneDistance = new Node("distanceIs1");
-		Node twoDistance = new Node("distanceIs2");
-		Node threeDistance = new Node("distanceIs3");
-		Node fourDistance = new Node("distanceIs4");
-		Node oneOrfourDistance = new Node("distanceIs4Or1");
-		root.addNeighbor(oneDistance);
-		oneDistance.addNeighbor(twoDistance);
-		twoDistance.addNeighbor(threeDistance);
-		threeDistance.addNeighbor(fourDistance);
-		threeDistance.addNeighbor(oneOrfourDistance);
-		root.addNeighbor(oneOrfourDistance);
-		System.out.println("True when shortest distance is returned");
-		HashMap<Node, Integer> distanceMap= graph.dijkstra();
-		assertTrue(distanceMap.get(oneOrfourDistance)==1 && distanceMap.get(fourDistance)==4 &&
-				distanceMap.get(threeDistance)==3 && distanceMap.get(twoDistance)==2);
-	}
 }

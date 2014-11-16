@@ -75,22 +75,4 @@ public class Graph {
 		return false;
 	}
 	
-	public HashMap<Node, Integer> dijkstra(){
-		HashMap<Node, Integer> distanceMap = new HashMap<Node, Integer>();
-		LinkedList<Node> toBeVisitedQueue = new LinkedList<Node>();
-		toBeVisitedQueue.add(getRoot());
-		distanceMap.put(getRoot(), 0);
-		while(!toBeVisitedQueue.isEmpty()) {
-			Node currentNode = toBeVisitedQueue.poll();
-			int currentDistance = distanceMap.get(currentNode);
-			for(Node neighbor: currentNode.getNeighbors()){
-				if(distanceMap.get(neighbor)==null || distanceMap.get(neighbor)>currentDistance+1){
-					toBeVisitedQueue.add(neighbor);
-					distanceMap.put(neighbor, currentDistance+1);
-				}				
-			}
-		}
-		return distanceMap;
-	}
-	
 }
